@@ -36,7 +36,11 @@ int main(void)
     unsigned indexBuffer;
     GLCall(glGenBuffers(1, &indexBuffer));
     GLCall(glBindBuffer(GL_ARRAY_BUFFER, indexBuffer));
-    GLCall(glBufferData(GL_ARRAY_BUFFER, 6*sizeof(float), data, GL_STATIC_DRAW));
+    GLCall(glBufferData(GL_ARRAY_BUFFER, 6*sizeof(float), positions, GL_STATIC_DRAW));
+
+
+    GLCall(glVertexAttribPointer(0,2,GL_FLOAT, GL_FALSE, sizeof(float) * 2, 0));
+    
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
     {
