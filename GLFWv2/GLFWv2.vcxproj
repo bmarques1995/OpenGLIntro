@@ -153,7 +153,10 @@
     <ClCompile Include="Origem.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="classes\ErrorHandler.h" />
+    <ClInclude Include="src\classes\ErrorHandler.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="src\res\shaders\basic.shader" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,0 +1,41 @@
+commit 55a37a2ec2a638dad8d611c22e6c9d809c441312
+Author: Gadsden Engine Owner <gadsdenengine@outlook.com>
+Date:   Mon Apr 20 17:09:29 2020 -0300
+
+    Aula 5
+
+commit 39c9c7d7055d5e172c1898b1c254c065fb3ce4cd
+Author: Gadsden Engine Owner <gadsdenengine@outlook.com>
+Date:   Mon Apr 20 11:15:28 2020 -0300
+
+    Aula 4
+
+commit e599448e12e8ffabdfbc6b96dad5bae007051d5f
+Author: Gadsden Engine Owner <gadsdenengine@outlook.com>
+Date:   Mon Apr 20 10:33:50 2020 -0300
+
+    Aula 3
+
+commit 2253dd77e52e29801522e372fd6fbb3aebd2ce21
+Author: Gadsden Engine Owner <gadsdenengine@outlook.com>
+Date:   Sun Apr 19 22:01:28 2020 -0300
+
+    Aula 2
+
+commit 5764fa80401e333fee2f47cf69763e066d104672
+Author: Gadsden Engine Owner <gadsdenengine@outlook.com>
+Date:   Sun Apr 19 21:35:46 2020 -0300
+
+    Aula 1
+
+commit 75aa78ea182fa2869a32c8d3b23af2f12fdb20c4
+Author: Gadsden Engine Owner <gadsdenengine@outlook.com>
+Date:   Sun Apr 19 16:58:01 2020 -0300
+
+    Adicionar arquivos de projeto.
+
+commit 8298f52bd4824b029a2643f46b551bf0bd54446d
+Author: Gadsden Engine Owner <gadsdenengine@outlook.com>
+Date:   Sun Apr 19 16:57:54 2020 -0300
+
+    Adicionar .gitignore e .gitattributes.
