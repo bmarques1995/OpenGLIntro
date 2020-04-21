@@ -9,7 +9,7 @@
 
 #define GLCall(x) GLClearError();\
 	x;\
-	ASSERT(GLLogCall(#x, __FILE__, __LINE__, glGetError()))
+	ASSERT(GLLogCall(#x, __FILE__, __LINE__))
 
 static void GLClearError() 
 {
@@ -20,8 +20,7 @@ static bool GLLogCall
 (
 	const char * function, 
 	const char * file, 
-	size_t line,
-	GLenum error
+	size_t line
 ) 
 {
 	while (GLenum error = glGetError()) 
