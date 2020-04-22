@@ -153,13 +153,17 @@
     <ClCompile Include="Origem.cpp" />
     <ClCompile Include="src\classes\IndexBuffer.cpp" />
     <ClCompile Include="src\classes\Renderer.cpp" />
+    <ClCompile Include="src\classes\VertexArray.cpp" />
     <ClCompile Include="src\classes\VertexBuffer.cpp" />
+    <ClCompile Include="src\classes\VertexBufferLayout.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\classes\ErrorHandler.h" />
     <ClInclude Include="src\classes\IndexBuffer.h" />
     <ClInclude Include="src\classes\Renderer.h" />
+    <ClInclude Include="src\classes\VertexArray.h" />
     <ClInclude Include="src\classes\VertexBuffer.h" />
+    <ClInclude Include="src\classes\VertexBufferLayout.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="src\res\shaders\basic.shader" />

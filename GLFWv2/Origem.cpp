@@ -6,6 +6,7 @@
 #include <sstream>
 #include "src/classes/VertexBuffer.h"
 #include "src/classes/IndexBuffer.h"
+#include "src/classes/VertexArray.h"
 
 static unsigned CreateShader(const std::string& vertexShader, const std::string& fragmentShader);
 static unsigned CompileShader(unsigned type, const std::string& sourceCode);
@@ -90,17 +91,18 @@ int main(void)
 			2,3,0
 		};
 
-		unsigned vertexArray;
-		GLCall(glGenVertexArrays(1, &vertexArray));
-		GLCall(glBindVertexArray(vertexArray));
+		unsigned vertexArrays;
+		GLCall(glGenVertexArrays(1, &vertexArrays));
+		GLCall(glBindVertexArray(vertexArrays));
 
+		VertexArray vertexArray;
+		VertexBufferLayout vertexBufferLayout;
 		VertexBuffer vertexBuffer(positions, 4 * 2 * sizeof(float));
-
+		vertexBufferLayout.Push<float>(2);
+		vertexArray.AddBuffer(vertexBuffer,vertexBufferLayout);
 		IndexBuffer indexBuffer(indices, 6);
 
-		GLCall(glEnableVertexAttribArray(0));
-		GLCall(glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 2, 0));
-
+		
 		ShaderProgramSource programSource = ParseShader("src/res/shaders/basic.shader");
 		unsigned shader = CreateShader(programSource.VertexSource, programSource.FragmentSource);
 		GLCall(glUseProgram(shader));
@@ -110,7 +112,7 @@ int main(void)
 		GLCall(glUniform4f(uniformLocation, 0.0f, .5f, .25f, 1.0f));
 
 		GLCall(glUseProgram(0));
-		GLCall(glBindVertexArray(0));
+		vertexArray.Unbind();
 		GLCall(glBindBuffer(GL_ARRAY_BUFFER, 0));
 		GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0));
 
@@ -125,7 +127,7 @@ int main(void)
 			GLCall(glUseProgram(shader));
 			GLCall(glUniform4f(uniformLocation, 0.0f, g, .25f, 1.0f));
 
-			GLCall(glBindVertexArray(vertexArray));
+			vertexArray.Bind();
 			indexBuffer.Bind();
 
 			GLCall(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr));
