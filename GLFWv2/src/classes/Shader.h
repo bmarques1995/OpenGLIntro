@@ -21,7 +21,7 @@ public:
 	void Bind() const;
 	void Unbind() const;
 
-	void SetUniform1d(const std::string& uniformName, int x);
+	void SetUniform1i(const std::string& uniformName, int x);
 	void SetUniform1f(const std::string& uniformName, float x);
 	void SetUniform4f(const std::string& uniformName, float x, float y, float z, float w);
 private:

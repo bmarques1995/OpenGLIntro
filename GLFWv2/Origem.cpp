@@ -9,6 +9,7 @@
 #include "src/classes/VertexArray.h"
 #include "src/classes/Shader.h"
 #include "src/classes/Renderer.h"
+#include "src/classes/Texture.h"
 
 int main(void)
 {
@@ -23,7 +24,7 @@ int main(void)
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 	/* Create a windowed mode window and its OpenGL context */
-	window = glfwCreateWindow(720, 720, u8"Olá Mundo", NULL, NULL);
+	window = glfwCreateWindow(640, 480, u8"Olá Mundo", NULL, NULL);
 	if (!window)
 	{
 		glfwTerminate();
@@ -43,10 +44,10 @@ int main(void)
 	std::cout << glGetString(GL_VERSION) << std::endl;
 	{
 		float positions[] = {
-		   -0.5f, -0.5f,
-			0.5f, -0.5f,
-			0.5f,  0.5f,
-		   -0.5f,  0.5f
+		   -0.5f, -0.5f,  0.0f,  0.0f,
+			0.5f, -0.5f,  1.0f,  0.0f,
+			0.5f,  0.5f,  1.0f,  1.0f,
+		   -0.5f,  0.5f,  0.0f,  1.0f
 		};
 
 		unsigned indices[] = {
@@ -54,15 +55,24 @@ int main(void)
 			2,3,0
 		};
 
+		GLCall(glEnable(GL_BLEND));
+		GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
+
 		VertexArray vertexArray;
 		VertexBufferLayout vertexBufferLayout;
-		VertexBuffer vertexBuffer(positions, 4 * 2 * sizeof(float));
+		VertexBuffer vertexBuffer(positions, 4 * 4 * sizeof(float));
+		
+		vertexBufferLayout.Push<float>(2);
 		vertexBufferLayout.Push<float>(2);
 		vertexArray.AddBuffer(vertexBuffer, vertexBufferLayout);
 		IndexBuffer indexBuffer(indices, 6);
 
 		Shader shader("src/res/shaders/basic.shader");
 		shader.Bind();
+
+		Texture texture("src/res/textures/Gadsden.png");
+		texture.Bind(2);
+		shader.SetUniform1i("u_Texture", 2);
 
 		Renderer renderer;
 
@@ -84,6 +94,7 @@ int main(void)
 
 			vertexArray.Bind();
 			indexBuffer.Bind();
+			
 
 			renderer.Draw(vertexArray, indexBuffer, shader);
 			
