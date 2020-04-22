@@ -52,6 +52,10 @@ int main(void)
 	if (!glfwInit())
 		return -1;
 
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR,3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR,3);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
 	/* Create a windowed mode window and its OpenGL context */
 	window = glfwCreateWindow(720, 720, u8"Olá Mundo", NULL, NULL);
 	if (!window)
@@ -63,7 +67,7 @@ int main(void)
 	/* Make the window's context current */
 	glfwMakeContextCurrent(window);
 
-	glfwSwapInterval(2);
+	glfwSwapInterval(1);
 
 	if (glewInit() != GLEW_OK)
 		std::cout << "GLEW Error" << std::endl;
@@ -81,6 +85,10 @@ int main(void)
 		0,1,2,
 		2,3,0
 	};
+
+	unsigned vertexArray;
+	GLCall(glGenVertexArrays(1, &vertexArray));
+	GLCall(glBindVertexArray(vertexArray));
 
 	unsigned buffer;
 	GLCall(glGenBuffers(1, &buffer));
