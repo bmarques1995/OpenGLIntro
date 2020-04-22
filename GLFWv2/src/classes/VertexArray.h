@@ -1,8 +1,8 @@
 #pragma once
 
-#include "ErrorHandler.h"
+
 #include "VertexBufferLayout.h"
-#include <GL/glew.h>
+
 #include "VertexBuffer.h"
 
 class VertexArray 
@@ -13,8 +13,8 @@ public:
 	VertexArray();
 	~VertexArray();
 
-	void Bind();
-	void Unbind();
+	void Bind() const;
+	void Unbind() const;
 
 	void AddBuffer(const VertexBuffer& vertexBuffer, const VertexBufferLayout& vertexBufferLayout);
 };

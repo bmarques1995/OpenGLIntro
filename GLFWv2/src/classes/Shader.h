@@ -1,10 +1,5 @@
 #pragma once
 
-#include <sstream>
-#include <fstream>
-#include <iostream>
-#include <GL/glew.h>
-#include "ErrorHandler.h"
 #include <unordered_map>
 
 struct ShaderProgramSource

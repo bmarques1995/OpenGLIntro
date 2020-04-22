@@ -1,7 +1,5 @@
 #pragma once
 
-#include "ErrorHandler.h"
-#include <GL/glew.h>
 
 class VertexBuffer 
 {

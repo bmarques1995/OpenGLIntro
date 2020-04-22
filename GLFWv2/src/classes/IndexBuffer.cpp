@@ -1,5 +1,7 @@
 #include "IndexBuffer.h"
 
+#include "ErrorHandler.h"
+
 IndexBuffer::IndexBuffer(unsigned* data, unsigned count ): m_Count(count)
 {
 	ASSERT(sizeof (unsigned) == sizeof(GLuint));
@@ -14,12 +16,17 @@ IndexBuffer::~IndexBuffer()
 	GLCall(glDeleteBuffers(1, &m_RendererID));
 }
 
-void IndexBuffer::Bind()
+void IndexBuffer::Bind() const
 {
 	GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_RendererID));
 }
 
-void IndexBuffer::Unbind()
+void IndexBuffer::Unbind() const
 {
 	GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0));
+}
+
+unsigned IndexBuffer::GetNumberOfMembers() const
+{
+	return m_Count;
 }

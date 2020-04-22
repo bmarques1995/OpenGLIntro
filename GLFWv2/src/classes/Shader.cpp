@@ -1,5 +1,11 @@
 #include "Shader.h"
 
+#include <sstream>
+#include <fstream>
+#include <iostream>
+#include <GL/glew.h>
+#include "ErrorHandler.h"
+
 Shader::Shader(const std::string& filepath)
 	: m_FilePath(filepath)
 {

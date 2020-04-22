@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ErrorHandler.h"
+
 #include <GL/glew.h>
 
 class IndexBuffer 
@@ -12,6 +12,8 @@ public:
 	IndexBuffer(unsigned* data, unsigned count);
 	~IndexBuffer();
 
-	void Bind();
-	void Unbind();
+	void Bind() const;
+	void Unbind() const;
+
+	unsigned GetNumberOfMembers() const;
 };

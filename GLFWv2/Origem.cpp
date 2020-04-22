@@ -8,6 +8,7 @@
 #include "src/classes/IndexBuffer.h"
 #include "src/classes/VertexArray.h"
 #include "src/classes/Shader.h"
+#include "src/classes/Renderer.h"
 
 int main(void)
 {
@@ -53,21 +54,17 @@ int main(void)
 			2,3,0
 		};
 
-		unsigned vertexArrays;
-		GLCall(glGenVertexArrays(1, &vertexArrays));
-		GLCall(glBindVertexArray(vertexArrays));
-
 		VertexArray vertexArray;
 		VertexBufferLayout vertexBufferLayout;
 		VertexBuffer vertexBuffer(positions, 4 * 2 * sizeof(float));
 		vertexBufferLayout.Push<float>(2);
-		vertexArray.AddBuffer(vertexBuffer,vertexBufferLayout);
+		vertexArray.AddBuffer(vertexBuffer, vertexBufferLayout);
 		IndexBuffer indexBuffer(indices, 6);
 
 		Shader shader("src/res/shaders/basic.shader");
 		shader.Bind();
-		
-		//shader.SetUniform4f("u_Color", 0.0f, .5f, .25f, 1.0f);
+
+		Renderer renderer;
 
 		shader.Unbind();
 		vertexArray.Unbind();
@@ -80,7 +77,7 @@ int main(void)
 		while (!glfwWindowShouldClose(window))
 		{
 			/* Render here */
-			GLCall(glClear(GL_COLOR_BUFFER_BIT));
+			renderer.Clear();
 
 			shader.Bind();
 			shader.SetUniform4f("u_Color", 0.0f, g, .25f, 1.0f);
@@ -88,8 +85,8 @@ int main(void)
 			vertexArray.Bind();
 			indexBuffer.Bind();
 
-			GLCall(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr));
-
+			renderer.Draw(vertexArray, indexBuffer, shader);
+			
 			if (g > 1.0f)
 				increment = -.05f;
 			else if (g < 0.0f)
@@ -105,7 +102,7 @@ int main(void)
 		}
 	}
 
-	glfwTerminate(); 
-	
+	glfwTerminate();
+
 	return 0;
 }
