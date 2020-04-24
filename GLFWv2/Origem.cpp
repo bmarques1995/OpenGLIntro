@@ -11,6 +11,9 @@
 #include "src/classes/Renderer.h"
 #include "src/classes/Texture.h"
 
+#include "glm/glm.hpp"
+#include "glm/gtc/matrix_transform.hpp"
+
 int main(void)
 {
 	GLFWwindow* window;
@@ -24,7 +27,7 @@ int main(void)
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 	/* Create a windowed mode window and its OpenGL context */
-	window = glfwCreateWindow(640, 480, u8"Olá Mundo", NULL, NULL);
+	window = glfwCreateWindow(1280, 720, u8"Olá Mundo", NULL, NULL);
 	if (!window)
 	{
 		glfwTerminate();
@@ -61,11 +64,13 @@ int main(void)
 		VertexArray vertexArray;
 		VertexBufferLayout vertexBufferLayout;
 		VertexBuffer vertexBuffer(positions, 4 * 4 * sizeof(float));
-		
+
 		vertexBufferLayout.Push<float>(2);
 		vertexBufferLayout.Push<float>(2);
 		vertexArray.AddBuffer(vertexBuffer, vertexBufferLayout);
 		IndexBuffer indexBuffer(indices, 6);
+
+		glm::mat4 projectionMatrix = glm::ortho(-4.0f, 4.0f, -2.25f, 2.25f, -1.0f, 1.0f);
 
 		Shader shader("src/res/shaders/basic.shader");
 		shader.Bind();
@@ -73,6 +78,7 @@ int main(void)
 		Texture texture("src/res/textures/Gadsden.png");
 		texture.Bind(2);
 		shader.SetUniform1i("u_Texture", 2);
+		shader.SetUniformMat4f("u_MVP", projectionMatrix);
 
 		Renderer renderer;
 
@@ -94,10 +100,10 @@ int main(void)
 
 			vertexArray.Bind();
 			indexBuffer.Bind();
-			
+
 
 			renderer.Draw(vertexArray, indexBuffer, shader);
-			
+
 			if (g > 1.0f)
 				increment = -.05f;
 			else if (g < 0.0f)
