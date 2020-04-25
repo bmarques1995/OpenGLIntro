@@ -70,7 +70,13 @@ int main(void)
 		vertexArray.AddBuffer(vertexBuffer, vertexBufferLayout);
 		IndexBuffer indexBuffer(indices, 6);
 
+		//representa o espaço
 		glm::mat4 projectionMatrix = glm::ortho(-4.0f, 4.0f, -2.25f, 2.25f, -1.0f, 1.0f);
+		//representa o elemento de visualização (câmera)
+		glm::mat4 viewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(-2.0f, 0, 0));
+		//representa a posição
+		glm::mat4 modelMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(2.0f, -1.0f, 0.0f));
+		glm::mat4 mvp = projectionMatrix * viewMatrix * modelMatrix;
 
 		Shader shader("src/res/shaders/basic.shader");
 		shader.Bind();
@@ -78,7 +84,7 @@ int main(void)
 		Texture texture("src/res/textures/Gadsden.png");
 		texture.Bind(2);
 		shader.SetUniform1i("u_Texture", 2);
-		shader.SetUniformMat4f("u_MVP", projectionMatrix);
+		shader.SetUniformMat4f("u_MVP", mvp);
 
 		Renderer renderer;
 
